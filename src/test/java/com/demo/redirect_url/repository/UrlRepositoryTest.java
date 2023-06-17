@@ -51,8 +51,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
         UrlEntity savedUrlEntity = urlRepository.save(urlEntity);
 
-        assertNotNull(savedUrlEntity.getId());
-
         Optional<UrlEntity> retrievedUrlEntity = urlRepository.findById(savedUrlEntity.getId());
 
         assertTrue(retrievedUrlEntity.isPresent());

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.datasource.driver-class-name=org.h2.Driver",
         "spring.jpa.hibernate.ddl-auto=create-drop"
 })
-public class UrlRepositoryTest {
+ class UrlRepositoryTest {
 
     @Autowired
     UrlRepository urlRepository;
@@ -27,7 +27,7 @@ public class UrlRepositoryTest {
 
     @DisplayName("Find Url by ShortCode")
     @Test
-    public void testFindUrlEntityByShortCode(){
+    void testFindUrlEntityByShortCode(){
 
         UrlEntity urlEntity = new UrlEntity(1,"bit.ly","https://www.facebook.com/");
 
@@ -45,7 +45,7 @@ public class UrlRepositoryTest {
 
     @DisplayName("Save")
     @Test
-    public void testSaveUrlEntity(){
+     void testSaveUrlEntity(){
 
         UrlEntity urlEntity = new UrlEntity(1,"bit.ly","https://www.facebook.com/");
 
@@ -62,7 +62,7 @@ public class UrlRepositoryTest {
     }
     @DisplayName("Delete")
     @Test
-    public void testDeleteUrlEntity (){
+     void testDeleteUrlEntity (){
         UrlEntity urlEntity = new UrlEntity();
         urlEntity.setShortCode("bit.ly");
         urlEntity.setRedirectUrl("https://www.facebook.com/");
@@ -73,7 +73,7 @@ public class UrlRepositoryTest {
 
     @DisplayName("Update")
     @Test
-    public void testUpdateUrlEntity(){
+     void testUpdateUrlEntity(){
         UrlEntity urlEntity = new UrlEntity(1,"bit.ly","https://www.facebook.com/");
         urlRepository.save(urlEntity);
 

@@ -13,8 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
@@ -53,17 +52,20 @@ class UrlServiceImplTest {
         assertEquals(urlEntity.getRedirectUrl(),savedUser.getRedirectUrl());
     }
 
-  /*  @Test
-    void ifShortCodeIsExistWhenSave(){
+    @Test
+    void ifShortCodeIsExistThrowExceptionWhenSave(){
         SaveUrlRequestDto saveUrlRequestDto = new SaveUrlRequestDto("bit.ly","https://www.facebook.com/");
 
         UrlEntity urlEntity = modelMapper.map(saveUrlRequestDto,UrlEntity.class);
-        UrlEntity savedUser = urlService.save(saveUrlRequestDto);
+
+        urlService.save(saveUrlRequestDto);
 
         SaveUrlRequestDto saveUrlRequestDto2 = new SaveUrlRequestDto("bit.ly","https://www.facebook.com/");
 
+        when(urlRepository.findByShortCode(saveUrlRequestDto2.getShortCode())).thenReturn(Optional.ofNullable(urlEntity));
+        assertThrows(RuntimeException.class,() -> {
+            throw new RuntimeException("Short Code already Exist");
+        });
 
     }
-*/
-
 }

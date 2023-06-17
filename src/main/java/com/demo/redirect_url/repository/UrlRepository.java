@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface UrlRepository extends JpaRepository<UrlEntity,Long> {
-    Optional<UrlEntity> findByShortCode(String shortCode);
-
+    Optional<UrlEntity> findByShortCode (String shortCode);
+    void deleteByShortCode (String shortCode);
 }

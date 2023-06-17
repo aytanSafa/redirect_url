@@ -34,4 +34,8 @@ public class UrlServiceImpl {
         }
         return urlEntityOptional.get().getRedirectUrl();
     }
+
+    public void deleteByShortCode(String shortCode) {
+        urlRepository.deleteByShortCode(shortCode);
+    }
 }

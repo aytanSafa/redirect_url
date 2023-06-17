@@ -66,6 +66,21 @@ class UrlServiceImplTest {
         assertThrows(RuntimeException.class,() -> {
             throw new RuntimeException("Short Code already Exist");
         });
+    }
+
+
+    @Test
+    void testFindUrlEntityIfExist(){
+
+        UrlEntity urlEntity = new UrlEntity(1,"bit.ly","https://www.facebook.com/");
+
+        when(urlRepository.findByShortCode("bit.ly")).thenReturn(Optional.of(urlEntity));
+
+        String redirectUrl = urlService.findUrlByShortCode("bit.ly");
+
+        assertEquals(urlEntity.getRedirectUrl(),redirectUrl);
 
     }
+
+
 }

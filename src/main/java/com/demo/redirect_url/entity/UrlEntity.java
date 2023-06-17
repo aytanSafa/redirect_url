@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Table(name = "urls")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +18,10 @@ public class UrlEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(name = "short_code")
     private String shortCode;
 
-    @Column
+    @Column(name = "redirect_url")
     private String redirectUrl;
 
 }

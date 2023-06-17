@@ -1,8 +1,9 @@
-package com.demo.redirect_url.service.impl;
+package com.demo.redirect_url.service;
 
 import com.demo.redirect_url.dto.SaveUrlRequestDto;
 import com.demo.redirect_url.entity.UrlEntity;
 import com.demo.redirect_url.repository.UrlRepository;
+import com.demo.redirect_url.service.UrlService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;
@@ -19,13 +20,13 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-class UrlServiceImplTest {
+class UrlServiceTest {
 
 
     @MockBean
     UrlRepository urlRepository;
     @Autowired
-    UrlServiceImpl urlService;
+    UrlService urlService;
 
     @Autowired
     ModelMapper modelMapper;

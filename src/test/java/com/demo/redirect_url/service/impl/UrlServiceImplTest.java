@@ -15,8 +15,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -91,5 +90,15 @@ class UrlServiceImplTest {
 
     }
 
+    @Test
+    void testDeleteUrlEntity(){
+        String shortCode = "bit.ly";
+
+        doNothing().when(urlRepository).deleteByShortCode(shortCode);
+
+        urlService.deleteByShortCode(shortCode);
+
+        verify(urlRepository).deleteByShortCode(shortCode);
+    }
 
 }

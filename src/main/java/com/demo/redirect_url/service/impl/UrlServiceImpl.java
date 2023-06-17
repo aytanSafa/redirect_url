@@ -17,6 +17,9 @@ public class UrlServiceImpl {
     private final ModelMapper modelMapper;
 
     public UrlEntity save(SaveUrlRequestDto saveUrlRequestDto) {
+        if (urlRepository.findByShortCode(saveUrlRequestDto.getShortCode()).isPresent()){
+            throw new RuntimeException("Short Code already Exist");
+        }
         UrlEntity urlEntity = modelMapper.map(saveUrlRequestDto, UrlEntity.class);
         return  urlRepository.save(urlEntity);
     }

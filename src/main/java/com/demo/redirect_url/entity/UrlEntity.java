@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "redirect")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RedirectEntity {
+public class UrlEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

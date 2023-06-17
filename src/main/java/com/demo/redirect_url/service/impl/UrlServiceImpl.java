@@ -43,8 +43,11 @@ public class UrlServiceImpl {
 
         Optional<UrlEntity> oldUrlEntityOpt = urlRepository.findById(urlEntity.getId());
 
-        UrlEntity oldUrlEntity = oldUrlEntityOpt.get();
+        if (oldUrlEntityOpt.isEmpty()){
+            return urlRepository.save(urlEntity);
+        }
 
+        UrlEntity oldUrlEntity = oldUrlEntityOpt.get();
         oldUrlEntity.setShortCode(urlEntity.getShortCode());
         oldUrlEntity.setRedirectUrl(urlEntity.getRedirectUrl());
 

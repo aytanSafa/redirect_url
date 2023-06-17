@@ -85,7 +85,7 @@ class UrlServiceImplTest {
     @Test
     void testFindUrlEntityIfNotExist(){
 
-        when(urlRepository.findByShortCode(anyString())).thenReturn(Optional.ofNullable(null));
+        when(urlRepository.findByShortCode(anyString())).thenReturn(Optional.empty());
         assertThrows(RuntimeException.class,
                 () -> urlService.findUrlByShortCode("bit.ly"));
 

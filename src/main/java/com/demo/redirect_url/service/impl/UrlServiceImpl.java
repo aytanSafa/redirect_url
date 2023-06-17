@@ -29,6 +29,9 @@ public class UrlServiceImpl {
 
     public String findUrlByShortCode(String shortCode) {
         Optional<UrlEntity> urlEntityOptional = urlRepository.findByShortCode(shortCode);
+        if (urlEntityOptional.isEmpty()){
+            throw new RuntimeException("Short Code doesn't exist");
+        }
         return urlEntityOptional.get().getRedirectUrl();
     }
 }

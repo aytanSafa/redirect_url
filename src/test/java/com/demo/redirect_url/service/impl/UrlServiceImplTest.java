@@ -117,4 +117,22 @@ class UrlServiceImplTest {
         assertEquals(result.getShortCode(), updatedUrlEntity.getShortCode());
         assertEquals(result.getRedirectUrl(), updatedUrlEntity.getRedirectUrl());
     }
+
+    @Test
+    void testUpdateUrlEntityIfDoesntExistEntity(){
+
+        UrlEntity updatedUrlEntity = new UrlEntity(1L,"bit.ly","https://www.facebook.com/");
+
+        when(urlRepository.findById(updatedUrlEntity.getId())).thenReturn(Optional.empty());
+        when(urlRepository.save(updatedUrlEntity)).thenReturn(updatedUrlEntity);
+
+        UrlEntity result = urlService.updateUrlEntity(updatedUrlEntity);
+
+        assertNotNull(result);
+        assertEquals(result.getId(), updatedUrlEntity.getId());
+        assertEquals(result.getShortCode(), updatedUrlEntity.getShortCode());
+        assertEquals(result.getRedirectUrl(), updatedUrlEntity.getRedirectUrl());
+    }
+
+
 }

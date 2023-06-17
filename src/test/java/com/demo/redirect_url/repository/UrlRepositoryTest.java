@@ -65,8 +65,8 @@ import static org.junit.jupiter.api.Assertions.*;
         urlEntity.setShortCode("bit.ly");
         urlEntity.setRedirectUrl("https://www.facebook.com/");
         urlRepository.save(urlEntity);
-        urlRepository.delete(urlEntity);
-        assertFalse(urlRepository.findById(1L).isPresent());
+        urlRepository.deleteByShortCode("bit.ly");
+        assertFalse(urlRepository.findByShortCode("bit.ly").isPresent());
     }
 
     @DisplayName("Update")

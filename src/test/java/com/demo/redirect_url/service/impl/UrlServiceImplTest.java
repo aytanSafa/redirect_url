@@ -1,9 +1,11 @@
 package com.demo.redirect_url.service.impl;
 
+import com.demo.redirect_url.dto.SaveUrlRequestDto;
 import com.demo.redirect_url.entity.UrlEntity;
 import com.demo.redirect_url.repository.UrlRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,29 +28,42 @@ class UrlServiceImplTest {
     @Autowired
     UrlServiceImpl urlService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
 
 
 
     @Test
-    public void testSaveUrlEntity() {
-        // Create a user entity
-        UrlEntity urlEntity = new UrlEntity(1,"bit.ly","https://www.facebook.com/");
+    void testSaveUrlEntity() {
 
-        // Mock the behavior of the repository's save method
+        SaveUrlRequestDto saveUrlRequestDto = new SaveUrlRequestDto("bit.ly","https://www.facebook.com/");
+
+        UrlEntity urlEntity = modelMapper.map(saveUrlRequestDto,UrlEntity.class);
+
         when(urlRepository.save(urlEntity)).thenReturn(urlEntity);
 
-        // Call the save method on the service
-        UrlEntity savedUser = urlService.save(urlEntity);
+        UrlEntity savedUser = urlService.save(saveUrlRequestDto);
 
-        // Verify that the repository's save method was called with the expected entity
-        verify(urlService).save(urlEntity);
+        verify(urlRepository).save(urlEntity);
 
-        // Perform assertions to verify the result
         assertNotNull(savedUser);
 
         assertEquals(urlEntity.getShortCode(),savedUser.getShortCode());
         assertEquals(urlEntity.getRedirectUrl(),savedUser.getRedirectUrl());
     }
 
+  /*  @Test
+    void ifShortCodeIsExistWhenSave(){
+        SaveUrlRequestDto saveUrlRequestDto = new SaveUrlRequestDto("bit.ly","https://www.facebook.com/");
+
+        UrlEntity urlEntity = modelMapper.map(saveUrlRequestDto,UrlEntity.class);
+        UrlEntity savedUser = urlService.save(saveUrlRequestDto);
+
+        SaveUrlRequestDto saveUrlRequestDto2 = new SaveUrlRequestDto("bit.ly","https://www.facebook.com/");
+
+
+    }
+*/
 
 }

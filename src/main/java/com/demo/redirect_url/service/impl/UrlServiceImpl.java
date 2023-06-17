@@ -34,8 +34,21 @@ public class UrlServiceImpl {
         }
         return urlEntityOptional.get().getRedirectUrl();
     }
-
     public void deleteByShortCode(String shortCode) {
         urlRepository.deleteByShortCode(shortCode);
+    }
+
+
+    public UrlEntity updateUrlEntity(UrlEntity urlEntity) {
+
+        Optional<UrlEntity> oldUrlEntityOpt = urlRepository.findById(urlEntity.getId());
+
+        UrlEntity oldUrlEntity = oldUrlEntityOpt.get();
+
+        oldUrlEntity.setShortCode(urlEntity.getShortCode());
+        oldUrlEntity.setRedirectUrl(urlEntity.getRedirectUrl());
+
+        return urlRepository.save(oldUrlEntity);
+
     }
 }

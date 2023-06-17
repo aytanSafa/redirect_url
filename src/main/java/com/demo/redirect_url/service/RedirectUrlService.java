@@ -6,13 +6,13 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Service
 @RequiredArgsConstructor
-public class RedirectUrlService implements RedirectUrlService {
+public class RedirectUrlService{
 
     private final UrlService urlService;
 
-
-    @Override
     public RedirectView redirectUrl(String shortCode) {
-        return null;
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(urlService.findUrlByShortCode(shortCode));
+        return redirectView;
     }
 }
